@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/random silly chip song.ogg-b3608c98b702f0518ccd021040bf1aee.oggstr"
+
+[deps]
+
+source_file="res://Assets/Player_song/random silly chip song.ogg"
+dest_files=[ "res://.import/random silly chip song.ogg-b3608c98b702f0518ccd021040bf1aee.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

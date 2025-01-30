@@ -1,28 +1,34 @@
 extends TileMap
 
+
 var size = 500
 var score = 0
+
+# type des cases
+enum Case { VIDE=-1, TERRE=0, HERBE=1, EAU=2 }
 
 onready var player = get_node("../Player")
 onready var score_label = get_node("../Player/ScoreLabel")
 
+
+
 # setup des cases par défaut
-# idéalement instancier les décors ici
 func _ready():
 	for x in range(size):
 		for y in range(size):
-			if get_cell(x, y) == -1: # not set
-				set_cell(x, y, 0)
+			if get_cell(x, y) == Case.VIDE:
+				set_cell(x, y, Case.TERRE)
+
 
 
 func _process(delta):
-	var cell = world_to_map(player.position/scale)
+	var cell = cell_from_position(player.position)
 	#print("x: ", cell.x, ", y: ", cell.y)
 	
 	var dscore = 0
 	for v in adjacent_cells(cell.x, cell.y, player.radius):
-		if get_cellv(v) == 0:
-			set_cellv(v, 1)
+		if get_cellv(v) == Case.TERRE:
+			set_cellv(v, Case.HERBE)
 			dscore += 1
 	score += dscore
 	
@@ -30,10 +36,11 @@ func _process(delta):
 
 
 
+# case sur la position
+func cell_from_position(p):
+	return world_to_map(p/scale)
 
-func cell_from_position():
-	pass
-
+# cases dans le rayon (euclidien)
 func adjacent_cells(x, y, r):
 	var adj = []
 	for i in range(-r, r):
@@ -42,6 +49,9 @@ func adjacent_cells(x, y, r):
 				adj.append(Vector2(x+i, y+j))
 	return adj
 
+
+
+# pas utilisée
 func gen_path(start, angle, n):
 	var path = [start]
 	var c = start

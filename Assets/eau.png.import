@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pearto.png-8331fe411e0c32377e7d670d31f0349f.stex"
+path="res://.import/eau.png-17cec8e24390600b64aabda70085032e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pearto.png"
-dest_files=[ "res://.import/pearto.png-8331fe411e0c32377e7d670d31f0349f.stex" ]
+source_file="res://Assets/eau.png"
+dest_files=[ "res://.import/eau.png-17cec8e24390600b64aabda70085032e.stex" ]
 
 [params]
 

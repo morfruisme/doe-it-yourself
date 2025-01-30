@@ -8,7 +8,7 @@ func _ready():
 
 func _on_StartButton_pressed():
 	# Charger et démarrer la scène du jeu
-	get_tree().change_scene("res://Scenes/Player/scene.tscn")
+	get_tree().change_scene("res://Scenes/Main/Main.tscn")
 
 func _on_QuitButton_pressed():
 	# Quitter le jeu

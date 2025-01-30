@@ -9,7 +9,6 @@ onready var terrain = get_node("../Terrain")
 func _ready():
 	pass # Replace with function body.
 
-
 func _process(delta):
 	var dir = Vector2(0, 0)
 	if (Input.is_action_pressed("ui_left")):

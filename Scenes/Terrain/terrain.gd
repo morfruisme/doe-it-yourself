@@ -1,4 +1,5 @@
-extends TileMap
+extends Node2D
+
 
 
 var size = 500
@@ -7,38 +8,41 @@ var score = 0
 # type des cases
 enum Case { VIDE=-1, TERRE=0, HERBE=1, EAU=2 }
 
-onready var player = get_node("../Player")
-onready var score_label = get_node("../Player/ScoreLabel")
+onready var t = $TileMap
+onready var player = get_node_or_null("Player")
+onready var score_label = get_node_or_null("Score")
 
 
 
 # setup des cases par défaut
 func _ready():
-	for x in range(size):
-		for y in range(size):
-			if get_cell(x, y) == Case.VIDE:
-				set_cell(x, y, Case.TERRE)
+	for x in range(-size, size):
+		for y in range(-size, size):
+			if t.get_cell(x, y) == Case.VIDE:
+				t.set_cell(x, y, Case.TERRE)
 
 
 
 func _process(delta):
-	var cell = cell_from_position(player.position)
+	if player == null:
+		return
+	
+	var p = player.get_node("KinematicBody2D").position
+	var cell = cell_from_position(p)
 	#print("x: ", cell.x, ", y: ", cell.y)
 	
 	var dscore = 0
 	for v in adjacent_cells(cell.x, cell.y, player.radius):
-		if get_cellv(v) == Case.TERRE:
-			set_cellv(v, Case.HERBE)
+		if t.get_cellv(v) == Case.TERRE:
+			t.set_cellv(v, Case.HERBE)
 			dscore += 1
 	score += dscore
-	
-	score_label.text = String(score)
 
 
 
 # case sur la position
 func cell_from_position(p):
-	return world_to_map(p/scale)
+	return t.world_to_map(p/t.scale)
 
 # cases dans le rayon (euclidien)
 func adjacent_cells(x, y, r):
